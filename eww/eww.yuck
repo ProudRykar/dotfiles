@@ -1,0 +1,129 @@
+
+;; ================================================================
+;; SCOURGE LAUNCHER
+;; Warcraft III: The Frozen Throne
+;; Eww 0.5.0 / Hyprland / Wayland
+;; ================================================================
+
+;; ---------- Состояние -------------------------------------------
+
+(defvar search "")
+
+(defpoll apps
+  :interval "1s"
+  :initial "[]"
+  `python3 /home/proudrykar/.config/eww/scripts/list-apps.py`
+)
+
+;; ---------- Элемент приложения ----------------------------------
+
+(defwidget app-entry [entry-text desktop-id]
+  (button
+    :class "entry-background"
+    :hexpand false
+    :vexpand false
+    :halign "start"
+    :valign "start"
+    :onclick "gtk-launch ${desktop-id} && eww close scourge && hyprctl dispatch submap reset"
+
+    (label
+      :class "entry-text"
+      :text entry-text
+      :halign "center"
+      :valign "center"
+    )
+  )
+)
+
+;; ---------- Главный интерфейс -----------------------------------
+
+(defwidget scourge-ui []
+  (overlay
+    ;; ---------- Основной контент -------------------------------
+
+    (box
+      :class "scourge-window"
+      :width 838
+      :height 600
+      :orientation "v"
+      :halign "fill"
+      :valign "fill"
+
+      (box
+        :class "scourge-content"
+        :orientation "v"
+        :halign "fill"
+        :valign "fill"
+        :space-evenly false
+
+        ;; ---------- Поисковая строка ----------------------------
+
+        (box
+          :class "search-background"
+          :hexpand true
+          :orientation "v"
+          :halign "fill"
+          :valign "center"
+
+          (input
+            :class "search-input"
+            :hexpand true
+            :halign "fill"
+            :valign "center"
+            :value search
+            :onchange "eww update search='{}'"
+          )
+        )
+
+        ;; ---------- Список приложений --------------------------
+
+        (scroll
+          :vscroll true
+          :height 350
+
+          (box
+            :class "app-list"
+            :orientation "v"
+            :spacing 0
+            :hexpand true
+            :vexpand false
+            :valign "start"
+
+            (for app in apps
+              (app-entry
+                :entry-text {app.name}
+                :desktop-id {app.id}
+              )
+            )
+          )
+        )
+      )
+    )
+
+    ;; ---------- Верхний слой: рамка ----------------------------
+
+    (image
+      :path "/home/proudrykar/.config/eww/assets/warcraft/01_main_window_frame.png"
+      :image-width 838
+      :image-height 600
+      :halign "fill"
+      :valign "fill"
+    )
+  )
+)
+
+;; ---------- Окно -----------------------------------------------
+
+(defwindow scourge
+  :monitor 0
+  :geometry (geometry
+    :width "838px"
+    :height "600px"
+    :anchor "center"
+  )
+  :stacking "overlay"
+  :focusable true
+  :namespace "scourge-launcher"
+
+  (scourge-ui)
+)

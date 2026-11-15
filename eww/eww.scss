@@ -1,0 +1,100 @@
+* {
+    background-color: transparent;
+}
+
+window {
+    background: transparent;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    box-shadow: none;
+}
+
+.scourge-content {
+    background-color: #141518;
+    margin: 110px 126px 88px 126px;
+}
+
+.app-list {
+    margin-top: 8px;
+    background-color: transparent;
+}
+
+.entry-row {
+    min-height: 48px;
+    padding: 5px 12px;
+    color: #c8c0a5;
+    background-color: rgba(23, 19, 30, 0.9);
+    border: 1px solid rgba(111, 99, 125, 0.4);
+}
+
+.entry-background {
+    min-width: 560px;
+    min-height: 100px;
+
+    margin: -26px 0 0 0;
+    padding: 0;
+
+    background-image: url("/home/proudrykar/.config/eww/assets/warcraft/03_entry_normal.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-color: transparent;
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.entry-background:hover {
+    background-image: url("/home/proudrykar/.config/eww/assets/warcraft/04_entry_selected.png");
+}
+
+.entry-text {
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    color: #c8c0a5;
+    font-weight: bold;
+    text-shadow: 0 1px 2px #000000;
+    background-color: transparent;
+}
+
+.scourge-window {
+    background-color: transparent;
+}
+
+.search-background {
+    min-height: 100px;
+
+    background-image: url("/home/proudrykar/.config/eww/assets/warcraft/02_search_bar.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-color: transparent;
+
+    padding: 0 24px;
+}
+
+.search-input {
+    min-height: 40px;
+    padding: 0 8px;
+    margin: 25px 0 0 30px;
+
+    color: #d8d0b5;
+    caret-color: #a9d65a;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    font-family: "Cinzel", "Cormorant Garamond", serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.search-input:focus {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}

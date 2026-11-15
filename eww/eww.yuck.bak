@@ -1,0 +1,74 @@
+
+;; ================================================================
+;; SCOURGE LAUNCHER
+;; Warcraft III: The Frozen Throne
+;; Eww 0.5.0 / Hyprland / Wayland
+;; ================================================================
+
+;; ---------- Главный интерфейс -----------------------------------
+
+(defwidget scourge-ui []
+  (overlay
+    (image
+      :path "/home/proudrykar/.config/eww/assets/warcraft/01_main_window_frame.png"
+      :image-width 838
+      :image-height 600
+      :preserve-aspect-ratio false
+    )
+
+    (box
+      :class "scourge-content"
+      :orientation "v"
+      :halign "fill"
+      :valign "fill"
+      :space-evenly false
+
+      (input
+        :class "search-input"
+        :value ""
+      )
+
+      (box
+        :class "app-list"
+        :orientation "v"
+        :spacing 0
+
+        (app-entry :entry-text "Warcraft III" :command "notify-send 'Scourge' 'Warcraft III launcher not configured'")
+        (app-entry :entry-text "Terminal" :command "kitty")
+        (app-entry :entry-text "File Manager" :command "nemo")
+        (app-entry :entry-text "Browser" :command "firefox")
+        (app-entry :entry-text "Settings" :command "notify-send 'Scourge' 'Settings launcher not configured'")
+      )
+    )
+  )
+)
+
+;; ---------- Окно -----------------------------------------------
+
+(defwidget app-entry [entry-text command]
+  (button
+    :class "entry-background"
+    :onclick command
+
+    (label
+      :class "entry-text"
+      :text entry-text
+      :halign "center"
+      :valign "center"
+    )
+  )
+)
+
+(defwindow scourge
+  :monitor 0
+  :geometry (geometry
+    :width "838px"
+    :height "600px"
+    :anchor "center"
+  )
+  :stacking "overlay"
+  :focusable false
+  :namespace "scourge-launcher"
+
+  (scourge-ui)
+)
